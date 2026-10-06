@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { encryptPassword } = require('./services/cryptoService');
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const DB_FILE = path.join(DATA_DIR, 'soat_db.json');
@@ -30,6 +31,16 @@ function loadDb() {
       db = { ...defaultDb, ...JSON.parse(data) };
       if (!db.settings) db.settings = { ...defaultDb.settings };
       if (!db.settings.tariffs) db.settings.tariffs = { ...defaultDb.settings.tariffs };
+
+      // Mavjud parollarni avtomatik shifrlash (AES-256)
+      let changed = false;
+      Object.values(db.users || {}).forEach(u => {
+        if (u.paxta_password && !u.paxta_password.startsWith('enc::')) {
+          u.paxta_password = encryptPassword(u.paxta_password);
+          changed = true;
+        }
+      });
+      if (changed) saveDb();
     } else {
       saveDb();
     }
@@ -87,6 +98,9 @@ const dbService = {
   updateUser(userId, updates) {
     const uid = String(userId);
     if (db.users[uid]) {
+      if (updates.paxta_password) {
+        updates.paxta_password = encryptPassword(updates.paxta_password);
+      }
       Object.assign(db.users[uid], updates);
       saveDb();
       return db.users[uid];

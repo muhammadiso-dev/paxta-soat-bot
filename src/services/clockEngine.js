@@ -1,5 +1,6 @@
 const { dbService } = require('../database');
 const { sessionManager } = require('./userSessionManager');
+const { decryptPassword } = require('./cryptoService');
 
 // Soat shablonlari
 const STYLES = {
@@ -96,7 +97,8 @@ class ClockEngine {
       // Agar cookie bo'lmasa, oldin login qilamiz
       let cookies = user.cookies;
       if (!cookies) {
-        const loginRes = await sessionManager.login(user.paxta_username, user.paxta_password);
+        const plainPassword = decryptPassword(user.paxta_password);
+        const loginRes = await sessionManager.login(user.paxta_username, plainPassword);
         if (!loginRes.ok) {
           dbService.updateUser(user.id, { last_error: loginRes.error });
           return;
@@ -111,7 +113,8 @@ class ClockEngine {
       // Agar sessiya tugagan bo'lsa (401), qayta login qilib yangilaymiz
       if (!res.ok && res.needReLogin) {
         console.log(`[Clock] User ${user.paxta_username} uchun sessiya yangilanmoqda...`);
-        const reLogin = await sessionManager.login(user.paxta_username, user.paxta_password);
+        const plainPassword = decryptPassword(user.paxta_password);
+        const reLogin = await sessionManager.login(user.paxta_username, plainPassword);
         if (reLogin.ok) {
           cookies = reLogin.cookies;
           dbService.updateUser(user.id, { cookies });
