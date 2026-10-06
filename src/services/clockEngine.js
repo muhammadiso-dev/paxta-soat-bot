@@ -44,32 +44,30 @@ class ClockEngine {
   start() {
     if (this.isRunning) return;
     this.isRunning = true;
-    console.log('⏰ Live Clock Engine ishga tushirildi (Sinxronlashtirilgan)!');
+    console.log('⏰ Live Clock Engine ishga tushirildi (Barqaror Ticker)!');
 
-    // Birinchi marta darhol yangilaymiz
-    this.tick();
+    // Dastlabki yangilash
+    this.tick().catch(e => console.error('[Clock Init Tick Warn]:', e.message));
 
-    // Har daqiqaning 50-soniyasida (yangi daqiqaga 10 soniya qolganda) keyingi vaqtni yuborish
-    const scheduleNextMinute = () => {
+    let lastTriggeredMinute = -1;
+
+    // Har 1 soniyada aniq tekshirib boruvchi doimiy dvigatel
+    this.intervalId = setInterval(() => {
+      if (!this.isRunning) return;
       const now = new Date();
-      const currentSec = now.getSeconds();
-      // 50-soniyani maqsad qilamiz
-      let msToNext = ((50 - currentSec + 60) % 60) * 1000 - now.getMilliseconds();
-      if (msToNext <= 500) msToNext += 60000;
+      const sec = now.getSeconds();
+      const min = now.getMinutes();
 
-      this.timeoutId = setTimeout(() => {
-        if (!this.isRunning) return;
-        this.tick();
-        scheduleNextMinute();
-      }, msToNext);
-    };
-
-    scheduleNextMinute();
+      // Har daqiqaning 50-soniyasida aniq 1 marta ishga tushadi
+      if (sec >= 50 && lastTriggeredMinute !== min) {
+        lastTriggeredMinute = min;
+        this.tick().catch(err => console.error('[Clock Tick Error]:', err.message));
+      }
+    }, 1000);
   }
 
   stop() {
     this.isRunning = false;
-    if (this.timeoutId) clearTimeout(this.timeoutId);
     if (this.intervalId) clearInterval(this.intervalId);
     console.log('⏹ Live Clock Engine to\'xtatildi');
   }

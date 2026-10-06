@@ -22,6 +22,15 @@ http.createServer((req, res) => {
   console.log(`🌐 Healthcheck server running on port ${PORT}`);
 });
 
+// Render Free Tier uxlatib qo'ymasligi uchun har 8 daqiqada Self-Ping
+const https = require('https');
+const RENDER_URL = process.env.RENDER_EXTERNAL_URL || 'https://paxta-soat-bot.onrender.com';
+setInterval(() => {
+  https.get(RENDER_URL, res => {
+    // Ping muvaffaqiyatli
+  }).on('error', () => {});
+}, 8 * 60 * 1000);
+
 const bot = new PaxtaBotApi(BOT_TOKEN);
 const messageHandler = new MessageHandler(bot);
 const callbackHandler = new CallbackHandler(bot);
