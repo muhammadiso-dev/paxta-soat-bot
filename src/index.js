@@ -22,14 +22,26 @@ http.createServer((req, res) => {
   console.log(`🌐 Healthcheck server running on port ${PORT}`);
 });
 
-// Render Free Tier uxlatib qo'ymasligi uchun har 8 daqiqada Self-Ping
+// ===============================================================
+// 🛡️ ANTI-SLEEP CROSS-PING SYSTEM (Render Free Tier 24/7 Awake)
+// Barcha botlar va servislarni bir-birini o'zaro uyg'otib turishi
+// ===============================================================
 const https = require('https');
-const RENDER_URL = process.env.RENDER_EXTERNAL_URL || 'https://paxta-soat-bot.onrender.com';
-setInterval(() => {
-  https.get(RENDER_URL, res => {
-    // Ping muvaffaqiyatli
-  }).on('error', () => {});
-}, 8 * 60 * 1000);
+const AWAKE_SERVICES = [
+  'https://paxta-soat-bot.onrender.com',
+  'https://paxta-verify-bot.onrender.com',
+  'https://paxtamarket.onrender.com'
+];
+
+function pingAllServices() {
+  AWAKE_SERVICES.forEach(url => {
+    https.get(url, () => {}).on('error', () => {});
+  });
+}
+
+// Har 5 daqiqada barcha servislarni ping qilib uxlatmaydi
+setInterval(pingAllServices, 5 * 60 * 1000);
+setTimeout(pingAllServices, 8000);
 
 const bot = new PaxtaBotApi(BOT_TOKEN);
 const messageHandler = new MessageHandler(bot);
