@@ -1,0 +1,81 @@
+{
+  "users": {
+    "100": {
+      "id": "100",
+      "username": "shade",
+      "first_name": "Muhammadiso • 16:08",
+      "paxta_username": "shade",
+      "paxta_password": "urRFEbgx5mgbWib",
+      "base_name": "Muhammadiso",
+      "clock_style": "style_3",
+      "clock_active": true,
+      "sub_until": "2026-11-05T11:09:43.029Z",
+      "is_trial_used": true,
+      "cookies": "XSRF-TOKEN=eyJpdiI6ImQ3SDNlZ2M4aDJ4Z0YxQThKcFZlM2c9PSIsInZhbHVlIjoiWFV4bXFxemg5S1pXUEU4VEg2bEF4R2RJRGRPeWNKcTE4c0grTkIrc1p1bGNlMEh0cjd0SzhQdDdVSHBubnYrc1FTQXg3YjdqRDdSR2Z1eDc2aEJBUHF4ZllWRENSTW1UUU5JV1QydUh4NVM2ZlZ6VEhUUFNtdldZbmE5TGl5Zi8iLCJtYWMiOiIxNTYxNTU0YTIyMjVkMWQ3YTBhMmNjOTA5ZWE1ZDgzZWQxZTcxOTNjNmIyYjM2ZmVkYzBjYWZmZTJiZTBmYjVmIiwidGFnIjoiIn0%3D; paxtagram_session=eyJpdiI6IkVOYjhwVmFnTmtaNExYM1phUjZtWHc9PSIsInZhbHVlIjoiZkJFbStmOE4zdWVWbTdDSTFHc2hVK2plekdKbUZXUlVQUHYvdmhocmU2WVBBSU5VZG9UV1ppK3VscHU4NEZ5L3VKM0lsTGlkQ2dreURycU5rVUR4b2VMZWsvMkFFZk1XaDhsUU1DUCtLRHZJUUpSckJVZTd1UzI3Zkt4YXB5dWIiLCJtYWMiOiI3OWM3MGFlMTQ1NmNkZGNkNTU1MGMyN2RmNmFlNjExYTkwYmFkNjYwMTBiNTlkMDgzMzE3YTdiZDQ3YTFlZmMzIiwidGFnIjoiIn0%3D",
+      "last_error": null,
+      "last_updated_at": "2026-10-06T11:15:50.175Z",
+      "step": null,
+      "created_at": "2026-10-06T10:47:12.695Z"
+    }
+  },
+  "payments": [
+    {
+      "code": "SOAT-6090",
+      "user_id": "100",
+      "plan": "1m",
+      "price": 500,
+      "fee": 75,
+      "days": 30,
+      "status": "completed",
+      "created_at": "2026-10-06T11:09:00.933Z",
+      "expires_at": "2026-10-06T12:09:00.933Z",
+      "paid_at": "2026-10-06T11:09:43.029Z",
+      "sender": {
+        "sender_id": 100,
+        "sender_name": "Muhammadiso • 16:08",
+        "sender_username": "shade",
+        "message_id": 41177
+      }
+    }
+  ],
+  "logs": [],
+  "settings": {
+    "tariffs": {
+      "1m": {
+        "name": "1 Oylik",
+        "price": 500,
+        "days": 30
+      },
+      "6m": {
+        "name": "6 Oylik",
+        "price": 2400,
+        "days": 180
+      },
+      "1y": {
+        "name": "1 Yillik VIP",
+        "price": 4200,
+        "days": 365
+      }
+    }
+  },
+  "paymentCodes": {
+    "SOAT-6090": {
+      "code": "SOAT-6090",
+      "user_id": "100",
+      "plan": "1m",
+      "price": 500,
+      "fee": 75,
+      "days": 30,
+      "status": "completed",
+      "created_at": "2026-10-06T11:09:00.933Z",
+      "expires_at": "2026-10-06T12:09:00.933Z",
+      "paid_at": "2026-10-06T11:09:43.029Z",
+      "sender": {
+        "sender_id": 100,
+        "sender_name": "Muhammadiso • 16:08",
+        "sender_username": "shade",
+        "message_id": 41177
+      }
+    }
+  }
+}
